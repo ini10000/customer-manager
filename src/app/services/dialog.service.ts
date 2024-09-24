@@ -8,6 +8,8 @@ import { DialogComponent } from '../dialog/dialog.component';
   providedIn: 'root'
 })
 export class DialogService {
+  action!: string
+
 
   constructor(
     private router: Router,

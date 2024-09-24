@@ -34,18 +34,21 @@ export class CustomerComponent implements OnInit {
   }
 
   goToView(element: ICustomer): void {
-    this.customerService.selectedCustomer = element
-    this.router.navigateByUrl(`/view-customer`);
+    this.dialogService.action = 'view';
+    this.dialogService.openDialog(element);
+
   }
 
   goToEdit(element: ICustomer, id: number): void {
     this.customerService.selectedCustomer = element
+    this.dialogService.action = 'edit';
     this.router.navigateByUrl(`/edit-customer/${id}`);
   }
 
 
   initDelete(rowIndex: number): void {
     const customerId = this.filteredItems[rowIndex].id;
+    this.dialogService.action = 'delete';
     if (customerId) {
       this.customerService.deleteCustomers(customerId).subscribe((data) => {
         this.dialogService.openDialog(this.filteredItems[rowIndex]);
